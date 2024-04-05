@@ -1,0 +1,37 @@
+<ng-container
+    *ngIf="{query: query$ | async} as data"
+  >
+    <ul *ngIf="data.query">
+      <cdk-virtual-scroll-viewport
+        role="presentation"
+        scrollWindow
+        [itemSize]="itemSize"
+        (scrolledIndexChange)="onScroll(data.query.nextPage)"
+        class="search-results__viewport"
+      >
+        <li>
+          <table>
+            <tr class="gri">
+              <th>Name</th>
+              <th>Description</th>
+              <th>Language</th>
+              <th>Number of stars</th>
+              <th>Last updated date</th>
+              <th>Owner's username</th>
+              <th>URL to repository</th>
+            </tr>
+            <tr *cdkVirtualFor="let result of data.query.results" class="h-[{{ itemSize }}px] gri">
+              <td>{{result.name}}</td>
+              <td>{{result.description}}</td>
+              <td>{{result.language}}</td>
+              <td>{{result.stargazers_count}}</td>
+              <td>{{result.updated_at}}</td>
+              <td>{{result.owner.login}}</td>
+              <td>{{result.html_url}}</td>
+            </tr>
+          </table>
+        </li>
+      </cdk-virtual-scroll-viewport>
+    </ul>
+</ng-container>
+  

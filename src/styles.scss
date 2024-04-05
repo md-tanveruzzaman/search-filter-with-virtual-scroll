@@ -1,4 +1,64 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+h1 {
+  font-size: 5rem;
+  font-weight: 900;
+  line-height: 1.1;
+  max-inline-size: 15ch;
+}
+
+@media (max-width: 640px) {
+  h1 {
+    font-size: 3rem;
+  }
+}
+
+h2 {
+  text-transform: uppercase;
+  text-align: end;
+}
+
+.dynamic-text-shadow {
+  text-shadow: 0.1em 0.1em 0 hsl(200 50% 30%);
+}
+
+.bg-top-gradiant {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 30s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.indeterminate-progress-bar {
+  .indeterminate-progress-bar__progress {
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-name: indeterminate-progress-bar;
+  }
+}
+
+@keyframes indeterminate-progress-bar {
+  from {
+    left: -50%;
+  }
+  to {
+    left: 100%;
+  }
+}
+
+.cdk-virtual-scroll-content-wrapper {
+  max-width: 100%;
+}
