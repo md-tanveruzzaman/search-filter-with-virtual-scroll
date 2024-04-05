@@ -2,14 +2,14 @@ import {HttpClient} from '@angular/common/http'
 import {Injectable} from '@angular/core'
 import {BehaviorSubject, combineLatest, map, Observable, of} from 'rxjs'
 import {catchError, mergeMap, scan, switchMap} from 'rxjs/operators'
-import { DefaultFilterValue, GithubRepo, GithubRequestParameters, IGithubQuery, IGithubRequestOptions, IGithubResult } from 'src/app/Models/github-search.model'
+import { DefaultFilterValue, GithubRepo, GithubRequestParameters, IGithubQuery, IGithubRequestOptions, IGithubResult, ILanguage } from 'src/app/Models/github-search.model'
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class GitgubSearchService {
-  private static readonly API_BASE = 'https://api.github.com/search/repositories'
+  private static readonly API_BASE = 'https://api.github.com/'
   private static readonly MAX_CONTENT_FETCH = 50
   private static readonly DEFAULT_PAGE = '1'
   private static readonly SORT_ORDER = 'desc'
@@ -100,7 +100,7 @@ export class GitgubSearchService {
     page,
     sortOrder
   }: IGithubRequestOptions): Observable<GithubRepo[]> {
-    const path = new URL(`${GitgubSearchService.API_BASE}`);
+    const path = new URL(`${GitgubSearchService.API_BASE}` + 'search/repositories');
 
     path.searchParams.append(GithubRequestParameters.LANG, DefaultFilterValue.LANG_PREFIX + lang);
     path.searchParams.append(GithubRequestParameters.SORT, DefaultFilterValue.SORT )
@@ -113,6 +113,13 @@ export class GitgubSearchService {
 
     return this.http.get<IGithubResult>(path.toString()).pipe(
       map(result => result.items)
+    )
+  }
+
+  getAllLanguages() {
+    const path = GitgubSearchService.API_BASE + 'languages';
+    return this.http.get<ILanguage[]>(path).pipe(
+      map(result => result)
     )
   }
 }

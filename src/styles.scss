@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "~@ng-select/ng-select/themes/material.theme.css";
+
 h1 {
   font-size: 5rem;
   font-weight: 900;

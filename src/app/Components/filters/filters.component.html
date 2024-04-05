@@ -1,0 +1,24 @@
+<div class="container mx-auto flex flex-row-reverse">
+    <div style="width: 200px" class="mt-5 mr-5">
+        <ng-select [(ngModel)]="selectedLanguage" 
+            placeholder="Select Language"
+            class="custom-ng-select"
+            (change)="onChangeLanguage()">
+            <ng-option 
+                *ngFor="let lang of languages"
+                [value]="lang.name">{{lang.name}} 
+            </ng-option>
+        </ng-select>
+    </div>
+
+    <div class="mt-5 mr-5">
+        <mat-form-field>
+            <mat-label>Sort Order</mat-label>
+            <mat-select disableRipple [(ngModel)]="sortOrder" (selectionChange)="onSelectSortOrder()">
+              <mat-option value="asc">Ascending </mat-option>
+              <mat-option value="desc">Descending </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    
+</div>

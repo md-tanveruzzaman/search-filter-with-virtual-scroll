@@ -11,6 +11,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LoaderInterceptorService } from './Services/loader-intercept.service';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { FiltersComponent } from './Components/filters/filters.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     BrowserAnimationsModule,
     ScrollingModule,
     HttpClientModule,
-    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
+    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
+    FiltersComponent
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

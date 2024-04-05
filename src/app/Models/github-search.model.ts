@@ -152,3 +152,8 @@ export interface GithubRepo {
     MD = 1024,
     SM = 640
   }
+
+  export interface ILanguage {
+    name: string
+    aliases: string[]
+  }
