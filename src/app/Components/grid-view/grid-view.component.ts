@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {CdkVirtualScrollViewport, ScrollingModule} from '@angular/cdk/scrolling';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { Observable, Subscription, debounceTime, fromEvent } from 'rxjs';
 import { GitgubSearchService } from 'src/app/Services/gitgub-search.service';
 import { BreakPoint, IGithubQuery, ViewPortSize } from 'src/app/Models/github-search.model';

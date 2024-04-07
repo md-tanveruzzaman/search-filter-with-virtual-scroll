@@ -7,14 +7,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DashboardComponent } from './Components/dashboard/dashboard.component';
 import { NavbarComponent } from './Components/navbar/navbar.component';
 import { GridViewComponent } from './Components/grid-view/grid-view.component';
-import { ScrollingModule } from '@angular/cdk/scrolling';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LoaderInterceptorService } from './Services/loader-intercept.service';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { FiltersComponent } from './Components/filters/filters.component';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FormsModule } from '@angular/forms';
-import {MatCardModule} from '@angular/material/card';
+import { CustomMaterialModule } from './Common/material.module';
 
 @NgModule({
   declarations: [
@@ -25,13 +23,11 @@ import {MatCardModule} from '@angular/material/card';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ScrollingModule,
+    CustomMaterialModule,
     HttpClientModule,
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
     FiltersComponent,
-    MatSlideToggleModule,
     FormsModule,
-    MatCardModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

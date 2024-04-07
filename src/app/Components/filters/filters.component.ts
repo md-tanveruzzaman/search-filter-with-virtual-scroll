@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import {MatSelectModule} from '@angular/material/select';
-import {MatFormFieldModule} from '@angular/material/form-field';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
 import { DefaultFilterValue, ILanguage } from 'src/app/Models/github-search.model';
 import { GitgubSearchService } from 'src/app/Services/gitgub-search.service';
 import { CommonModule } from '@angular/common';
+import { CustomMaterialModule } from 'src/app/Common/material.module';
 
 @Component({
   selector: 'app-filters',
   templateUrl: './filters.component.html',
   styleUrls: ['./filters.component.scss'],
   standalone: true,
-  imports: [MatFormFieldModule, MatSelectModule, NgSelectModule, FormsModule, CommonModule],
+  imports: [CustomMaterialModule, NgSelectModule, FormsModule, CommonModule],
 })
 export class FiltersComponent implements OnInit{
 
