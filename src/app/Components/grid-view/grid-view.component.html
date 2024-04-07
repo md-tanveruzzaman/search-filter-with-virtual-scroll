@@ -2,15 +2,16 @@
     *ngIf="{query: query$ | async} as data"
     class="container mx-auto"
   >
-    <ul *ngIf="data.query" class="m-8">
+    <ul *ngIf="data.query" class="mr-8 ml-8">
       <cdk-virtual-scroll-viewport
         role="presentation"
+        *ngIf="isGridView; else cardView"
         scrollWindow
         [itemSize]="itemSize"
         (scrolledIndexChange)="onScroll(data.query.nextPage)"
         class="search-results__viewport"
       >
-        <li class="grid" *ngIf="isGridView; else cardView">
+        <li class="grid" >
           <table>
             <tr class="">
               <th>Name</th>
@@ -32,19 +33,30 @@
             </tr>
           </table>
         </li>
-
-        <ng-template #cardView>
+      </cdk-virtual-scroll-viewport>
+      <ng-template #cardView>
+        <cdk-virtual-scroll-viewport
+          role="presentation"
+          scrollWindow
+          [itemSize]="itemSize"
+          (scrolledIndexChange)="onScroll(data.query.nextPage)"
+          class="search-results__viewport"
+        >
           <li class="gri">
-            <mat-card *cdkVirtualFor="let result of data.query.results" class="h-[{{ itemSize }}px] grid-tr">
+            <mat-card *cdkVirtualFor="let result of data.query.results" class="h-[{{ itemSize }}px] card-row">
               <mat-card-header>
                 <mat-card-title>{{result.name}}</mat-card-title>
-                <mat-card-subtitle>{{result.description}}</mat-card-subtitle>
+                <mat-card-subtitle>{{result.owner.login}}, Stars: {{result.stargazers_count}}, {{result.language}}</mat-card-subtitle>
               </mat-card-header>
+              <mat-card-content>
+                {{result.updated_at | date}}<br>
+                {{result.description}} <br>
+                <a [href]="result.html_url">{{result.html_url}}</a>
+              </mat-card-content>
             </mat-card>
           </li>
-          
-        </ng-template>
-      </cdk-virtual-scroll-viewport>
+        </cdk-virtual-scroll-viewport>
+      </ng-template>
     </ul>
 </ng-container>
   

@@ -14,9 +14,13 @@ export class GridViewComponent implements OnInit {
   private static readonly FETCH_MINIMUM = 10
   @ViewChild(CdkVirtualScrollViewport)
   public viewPort?: CdkVirtualScrollViewport
-  private readonly SM_SIZE = 20
-  private readonly MD_SIZE = 30
-  private readonly LG_SIZE = 40
+  private readonly SM_SIZE_GRID = 20
+  private readonly MD_SIZE_GRID = 30
+  private readonly LG_SIZE_GRID = 40
+
+  private readonly SM_SIZE_CARD = 80
+  private readonly MD_SIZE_CARD = 90
+  private readonly LG_SIZE_CARD = 100
 
   protected readonly query$: Observable<IGithubQuery>
 
@@ -26,7 +30,7 @@ export class GridViewComponent implements OnInit {
 
   private viewPortSize: ViewPortSize = ViewPortSize.LG
 
-  public itemSize = this.LG_SIZE
+  public itemSize = this.LG_SIZE_GRID
   onScrollTriggered: boolean = false;
   isGridView: boolean = true;
 
@@ -38,42 +42,46 @@ export class GridViewComponent implements OnInit {
       .subscribe({
         next: (isGrid) => {
           this.isGridView = isGrid;
-          this.onScroll('2')
+          if (!this.isGridView) {
+            this.itemSize = this.LG_SIZE_CARD
+          } else {
+            this.itemSize = this.LG_SIZE_GRID
+          }
+          this.getItemSize();
         }
       })
   }
 
   public ngOnInit(): void {
-    this.determineItemSize()
-
+    this.getItemSize()
     this.resizeObservable$ = fromEvent(window, 'resize')
     this.resizeSubscription$ = this.resizeObservable$
       .pipe(debounceTime(1000))
       .subscribe(() => {
-        this.determineItemSize()
+        this.getItemSize()
       })
   }
 
-  public determineItemSize() {
+  public getItemSize() {
     if (
       window.innerWidth < BreakPoint.MD &&
       this.viewPortSize !== ViewPortSize.MD
     ) {
-      this.itemSize = this.MD_SIZE
+      this.itemSize = this.isGridView ? this.MD_SIZE_GRID : this.MD_SIZE_CARD;
       this.viewPortSize = ViewPortSize.MD
       this.viewPort?.checkViewportSize()
     } else if (
       window.innerHeight < BreakPoint.SM &&
       this.viewPortSize !== ViewPortSize.SM
     ) {
-      this.itemSize = this.SM_SIZE
+      this.itemSize = this.isGridView ? this.SM_SIZE_GRID : this.SM_SIZE_CARD;
       this.viewPortSize = ViewPortSize.SM
       this.viewPort?.checkViewportSize()
     } else if (
       window.innerWidth > BreakPoint.MD &&
       this.viewPortSize !== ViewPortSize.LG
     ) {
-      this.itemSize = this.LG_SIZE
+      this.itemSize = this.isGridView ? this.LG_SIZE_GRID : this.LG_SIZE_CARD;
       this.viewPortSize = ViewPortSize.LG
       this.viewPort?.checkViewportSize()
     }
