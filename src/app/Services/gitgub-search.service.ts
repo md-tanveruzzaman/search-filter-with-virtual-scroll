@@ -14,6 +14,11 @@ export class GitgubSearchService {
   private static readonly DEFAULT_PAGE = '1'
   private static readonly SORT_ORDER = 'desc'
   private static readonly DEFAULT_LANGUAGE = 'javascript'
+  private static readonly IS_GRID_VIEW = true;
+
+  private readonly _isGridView$ = new BehaviorSubject(
+    GitgubSearchService.IS_GRID_VIEW
+  )
 
   private readonly _language$ = new BehaviorSubject(
     GitgubSearchService.DEFAULT_LANGUAGE
@@ -26,7 +31,11 @@ export class GitgubSearchService {
   private readonly _pageNumber$ = new BehaviorSubject(
     GitgubSearchService.DEFAULT_PAGE
   )
-  currentPage: string = '1'
+  currentPage: string = '1';
+
+  public getSelectedView(): Observable<boolean> {
+    return this._isGridView$.asObservable();
+  }
 
   public getLanguage(): Observable<string> {
     return this._language$.asObservable()
@@ -88,6 +97,11 @@ export class GitgubSearchService {
   public setLanguage(lang: string): void {
     this._language$.next(lang);
     this.setQueryPage(GitgubSearchService.DEFAULT_PAGE)
+  }
+
+  public setView(isGrid: boolean): void {
+    this._isGridView$.next(isGrid);
+    // this.setQueryPage(GitgubSearchService.DEFAULT_PAGE)
   }
 
 

@@ -12,6 +12,9 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LoaderInterceptorService } from './Services/loader-intercept.service';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { FiltersComponent } from './Components/filters/filters.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { FormsModule } from '@angular/forms';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,10 @@ import { FiltersComponent } from './Components/filters/filters.component';
     ScrollingModule,
     HttpClientModule,
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
-    FiltersComponent
+    FiltersComponent,
+    MatSlideToggleModule,
+    FormsModule,
+    MatCardModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

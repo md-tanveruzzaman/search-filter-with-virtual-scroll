@@ -28,11 +28,19 @@ export class GridViewComponent implements OnInit {
 
   public itemSize = this.LG_SIZE
   onScrollTriggered: boolean = false;
+  isGridView: boolean = true;
 
   public constructor(
     private readonly gitgubSearchService: GitgubSearchService
   ) {
-    this.query$ = this.gitgubSearchService.getQuery()
+    this.query$ = this.gitgubSearchService.getQuery();
+    this.gitgubSearchService.getSelectedView()
+      .subscribe({
+        next: (isGrid) => {
+          this.isGridView = isGrid;
+          this.onScroll('2')
+        }
+      })
   }
 
   public ngOnInit(): void {

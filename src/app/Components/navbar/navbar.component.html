@@ -1,5 +1,7 @@
 <nav class="docs-navbar-header">
     <a routerLink="/">GitHub Repository Dashboard</a>
     <div class="flex-spacer"></div>
-    <a >Select View</a>
+    <mat-slide-toggle 
+        [(ngModel)]="isCardView"
+        (change)="toggle($event)">Grid View</mat-slide-toggle>
 </nav>

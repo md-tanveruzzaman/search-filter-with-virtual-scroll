@@ -10,7 +10,7 @@
         (scrolledIndexChange)="onScroll(data.query.nextPage)"
         class="search-results__viewport"
       >
-        <li class="grid">
+        <li class="grid" *ngIf="isGridView; else cardView">
           <table>
             <tr class="">
               <th>Name</th>
@@ -28,10 +28,22 @@
               <td>{{result.stargazers_count }}</td>
               <td>{{result.updated_at | date}}</td>
               <td>{{result.owner.login}}</td>
-              <td>{{result.html_url}}</td>
+              <td><a [href]="result.html_url">{{result.html_url}}</a></td>
             </tr>
           </table>
         </li>
+
+        <ng-template #cardView>
+          <li class="gri">
+            <mat-card *cdkVirtualFor="let result of data.query.results" class="h-[{{ itemSize }}px] grid-tr">
+              <mat-card-header>
+                <mat-card-title>{{result.name}}</mat-card-title>
+                <mat-card-subtitle>{{result.description}}</mat-card-subtitle>
+              </mat-card-header>
+            </mat-card>
+          </li>
+          
+        </ng-template>
       </cdk-virtual-scroll-viewport>
     </ul>
 </ng-container>
