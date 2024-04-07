@@ -27,4 +27,16 @@ describe('DashboardComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should render Navbar Component', () => {
+    const compiled = fixture.nativeElement;
+    const navbarComponent = compiled.querySelector('app-navbar');
+    expect(navbarComponent).toBeTruthy();
+  })
+
+  it('should render filter component', () => {
+    const compiled = fixture.nativeElement;
+    const filterComponent = compiled.querySelector('app-filters');
+    expect(filterComponent).toBeTruthy();
+  })
 });

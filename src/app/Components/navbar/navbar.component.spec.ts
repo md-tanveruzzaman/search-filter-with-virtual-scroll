@@ -26,8 +26,6 @@ describe('NavbarComponent', () => {
   });
 
   it('should render title', () => {
-    const fixture = TestBed.createComponent(NavbarComponent);
-    fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('a')?.textContent).toContain('GitHub Repository Dashboard');
   });
