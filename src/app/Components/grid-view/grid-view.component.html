@@ -11,7 +11,7 @@
         (scrolledIndexChange)="onScroll(data.query.nextPage)"
         class="search-results__viewport"
       >
-        <li class="grid" >
+        <li class="grid-view-li" >
           <table>
             <tr class="">
               <th>Name</th>
@@ -42,7 +42,7 @@
           (scrolledIndexChange)="onScroll(data.query.nextPage)"
           class="search-results__viewport"
         >
-          <li class="gri">
+          <li class="card-view-li">
             <mat-card *cdkVirtualFor="let result of data.query.results" class="h-[{{ itemSize }}px] card-row">
               <mat-card-header>
                 <mat-card-title>{{result.name}}</mat-card-title>

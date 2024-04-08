@@ -20,9 +20,9 @@ export class GridViewComponent implements OnInit {
 
   private readonly SM_SIZE_CARD = 80
   private readonly MD_SIZE_CARD = 90
-  private readonly LG_SIZE_CARD = 100
+   LG_SIZE_CARD = 100
 
-  protected readonly query$: Observable<IGithubQuery>
+   query$: Observable<IGithubQuery>
 
   protected resizeObservable$?: Observable<Event>
 
@@ -38,21 +38,21 @@ export class GridViewComponent implements OnInit {
     private readonly gitgubSearchService: GitgubSearchService
   ) {
     this.query$ = this.gitgubSearchService.getQuery();
-    this.gitgubSearchService.getSelectedView()
-      .subscribe({
-        next: (isGrid) => {
-          this.isGridView = isGrid;
-          if (!this.isGridView) {
-            this.itemSize = this.LG_SIZE_CARD
-          } else {
-            this.itemSize = this.LG_SIZE_GRID
-          }
-          this.getItemSize();
-        }
-      })
   }
 
   public ngOnInit(): void {
+    this.gitgubSearchService.getSelectedView()
+    .subscribe({
+      next: (isGrid) => {
+        this.isGridView = isGrid;
+        if (!this.isGridView) {
+          this.itemSize = this.LG_SIZE_CARD
+        } else {
+          this.itemSize = this.LG_SIZE_GRID
+        }
+        this.getItemSize();
+      }
+    })
     this.getItemSize()
     this.resizeObservable$ = fromEvent(window, 'resize')
     this.resizeSubscription$ = this.resizeObservable$
@@ -102,4 +102,3 @@ export class GridViewComponent implements OnInit {
     }
   }
 }
-
