@@ -12,25 +12,31 @@
         class="search-results__viewport"
       >
         <li class="grid-view-li" >
-          <table>
-            <tr class="">
-              <th>Name</th>
-              <th>Description</th>
-              <th>Language</th>
-              <th>Stars</th>
-              <th>Updated Date</th>
-              <th>Username</th>
-              <th>URL</th>
-            </tr>
-            <tr *cdkVirtualFor="let result of data.query.results" class="h-[{{ itemSize }}px] grid-tr">
-              <td>{{result.name}}</td>
-              <td>{{result.description}}</td>
-              <td>{{result.language}}</td>
-              <td>{{result.stargazers_count }}</td>
-              <td>{{result.updated_at | date}}</td>
-              <td>{{result.owner.login}}</td>
-              <td><a [href]="result.html_url">{{result.html_url}}</a></td>
-            </tr>
+          <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+              <tr class="">
+                <th scope="col" class="px-2 py-3">Name</th>
+                <th scope="col" class="px-2 py-3">Description</th>
+                <th scope="col" class="px-2 py-3">Language</th>
+                <th scope="col" class="px-2 py-3">Stars</th>
+                <th scope="col" class="px-2 py-3">Updated Date</th>
+                <th scope="col" class="px-2 py-3">Username</th>
+                <th scope="col" class="px-2 py-3">URL</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *cdkVirtualFor="let result of data.query.results"
+                class="h-[{{ itemSize }}px] grid-tr odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{result.name}}</th>
+                <td class="px-6 py-4">{{result.description}}</td>
+                <td class="px-6 py-4">{{result.language}}</td>
+                <td class="px-6 py-4">{{result.stargazers_count }}</td>
+                <td class="px-6 py-4">{{result.updated_at | date}}</td>
+                <td class="px-6 py-4">{{result.owner.login}}</td>
+                <td class="px-6 py-4"><a [href]="result.html_url">{{result.html_url}}</a></td>
+              </tr>
+            </tbody>
+            
           </table>
         </li>
       </cdk-virtual-scroll-viewport>

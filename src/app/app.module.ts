@@ -13,11 +13,13 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { FiltersComponent } from './Components/filters/filters.component';
 import { FormsModule } from '@angular/forms';
 import { CustomMaterialModule } from './Common/material.module';
+import { ChartsComponent } from './Components/charts/charts.component';
+import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 @NgModule({
   declarations: [
     AppComponent, 
-    DashboardComponent, NavbarComponent, GridViewComponent
+    DashboardComponent, NavbarComponent, GridViewComponent, ChartsComponent
   ],
   imports: [
     BrowserModule,
@@ -28,12 +30,16 @@ import { CustomMaterialModule } from './Common/material.module';
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
     FiltersComponent,
     FormsModule,
+    BaseChartDirective
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: LoaderInterceptorService,
-    multi: true
-  }],
+  providers: [
+    provideCharts(withDefaultRegisterables()),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoaderInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

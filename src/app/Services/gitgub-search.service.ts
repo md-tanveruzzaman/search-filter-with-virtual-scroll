@@ -136,5 +136,17 @@ export class GitgubSearchService {
       map(result => result)
     )
   }
+
+  getLastYearsRepoByStars(startDate:any, endDate: any) {
+    const path = new URL(`${GitgubSearchService.API_BASE}` + 'search/repositories');
+
+    path.searchParams.append(GithubRequestParameters.LANG, `created:${startDate}..${endDate}`);
+    path.searchParams.append(GithubRequestParameters.SORT, DefaultFilterValue.SORT )
+    path.searchParams.append(GithubRequestParameters.ORDER, DefaultFilterValue.ORDER)
+
+    return this.http.get<IGithubResult>(path.toString()).pipe(
+      map(result => result.items)
+    )
+  }
 }
 
