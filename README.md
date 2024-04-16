@@ -1,3 +1,6 @@
+# Note
+ Please run npm install --force to bypass dependency conflict. 
+
 # Deployment
 Please check this link https://github-search-repo-153e3.web.app  (try with incognito if the link dosen't work)
 
